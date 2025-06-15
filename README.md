@@ -20,7 +20,7 @@ The dataset provided by Synergix Solutions includes the following key components
 
 - **Search Rank**: Organic search visibility data showing how often products are searched and their median search ranking.
 
-👉 [View Full Data Dictionary](Synergix-Solutions-Ecom-Analysis/Data/Data_Dictionary.csv)
+👉 [View Full Data Dictionary](Synergix-Solutions-Ecom-Analysis/Data/Data_Dictionary.png)
 
 
 ## 📌 Problem Statements, Solution approach and Key Findings
@@ -62,5 +62,4 @@ RETURN
     )
 ```
 After creating the Calendar Table, you must establish relationships between the Calendar Table and every other table that contains a Date column.
-Once all relationships are built correctly, your model should look similar to the following model:
-![Relations](<Assets/Table Relation Model.png>)
+Once all relationships are built correctly, your model should look similar to [this](Synergix-Solutions-Ecom-Analysis/Assets/Table_Relation_Model.png).
