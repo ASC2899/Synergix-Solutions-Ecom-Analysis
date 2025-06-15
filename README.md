@@ -1,1 +1,0 @@
-# Synergix-E-Com-Analysis---Business-Intelligence-Report

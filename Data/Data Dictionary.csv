@@ -1,0 +1,62 @@
+S No.,POS Data - weekly level,Definitions,Aggregation func
+1,SKU ID,SKU ID,
+2,Date,Date at which the order was executed - converted to weekend date,
+3,Product,Product Description ,
+4,Manufacturer,Manufacturer name,
+5,Sector,Sector name,
+6,Category,Category name,
+7,Segment,Segment name,
+8,Brand,Brand name,
+9,Revenue($),sales in dollars,sum
+10,quantity_sold,Total no units sold,sum
+11,Price_per_unit,Price,avg
+12,Page Traffic,No of people who have visited that product,sum
+,,,
+S No.,Online_Media - Weekly level,Definitions,Aggregation func
+1,SKU_ID,SKU ID for which the online campaign was executed,
+2,Date,Date - converted to weekend date,
+3,Online_Campaign_Id ,No of campaigns running for the SKU ID in the week,
+4,Online_Impressions,Total no of impressions,sum
+5,Online_Clicks,Total no of clicks,sum
+6,Online_Cost,Total cost,sum
+,,,
+S No.,Offline_Media,Definitions,Aggregation func
+1,Brand,Brand name,
+2,Date,Date - converted to weekend date,
+3,Campaign_Name (nunique),No of campaigns running for the Brand in the week,
+4,Country,Country applicable to,
+5,Video_Impressions,Total no of video impressions,sum
+6,Video_Clicks,Total no of video clicks,sum
+7,Video_Cost,Video Cost,sum
+8,Image_Impressions,Total no of image impressions,sum
+9,Image_Clicks,Total no of image clicks,sum
+10,Image_Cost,Image Cost,sum
+,,,
+S No.,Product Attributes - Daily level,Definitions,
+1,SKU_ID,sku_id,
+2,Date,Date  ,
+3,1_Star_Rating,Total no of 1 star rating,
+4,2_Star_Rating,Total no of 2 star rating,
+5,3_Star_Rating,Total no of 3 star rating,
+6,4_Star_Rating,Total no of 4 star rating,
+7,5_Star_Rating,Total no of 5 star rating,
+8,Product Availability,Product_availability,
+9,Image_Count,Total no of images available for the product ID on the website,
+10,Video_Count,Total no of videos available for the product ID on the website,
+11,Bullet_Count,Total no of bullet points available for the product ID on the website,
+12,Title_Count,Total no of title count available for the product ID on the website,
+13,Description_Length,Length of the description(character length),
+,,,
+S No.,VPC(vendor powered coupons) Data,Definitions,Aggregation func
+1,SKU_ID,sku id,
+2,Date,Date - converted to weekend date,
+3,PromotionId (nunique),No of promotions running for the SKU in the week,
+4,Quantity,Total No of units sold using coupons,sum
+5,Spend,Spend for the promotion,sum
+,,,
+,,,
+S No.,Search Rank,Definitions,Aggregation func
+1,SKU_ID,sku_id,
+2,Date,Date converted to weekend date,
+3,Search Terms (nunique),No of search terms for the SKU in the week,
+4,Organic Search Rank,Median Organic rank,Median
