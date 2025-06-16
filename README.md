@@ -57,11 +57,31 @@ To verify whether **units sold** also contributed to revenue growth, we compare 
 
 ---
 
-**❓Synergix wants to understand the impact of web traffic on unit sold.**
+**❓ Synergix Wants To Understand The Impact Of Web Traffic On Units Sold. They also want a visual to evaluate whether they are meeting their 10% additional Web Traffic Goal**.
 
-🔍 We need to plot **Total Web Traffic** and **Total Unit Sold** by time remove Quarter and Day level from the Date hierarchy using **Line and Clustered Column Chart**
+🔍 To explore this, we plot **Total Web Traffic** and **Total Units Sold** over time using a **Line and Clustered Column Chart**.  
+Make sure to **remove the Quarter and Day levels** from the Date hierarchy for a cleaner, monthly view.
 
-💡
+💡 The analysis reveals a **moderately positive relationship** between **Web Traffic** and **Units Sold**.  
+We can clearly observe that **spikes in web traffic correlate with increases in unit sales**.
+
+![alt text](Assets/Q2.png)
+
+---
+
+For tracking the **traffic target**, we create a **KPI card**. But before that, we define two DAX measures:  
+- **Web Traffic Latest Month**  
+- **Web Traffic Target**
+
+You can find the DAX logic for these measures in the [**🛠️ DAX**](#-dax) section.
+
+![alt text](Assets/Q2.1.png)
+
+
+**❓Synergix wants to know CTR of their Online Ads and also want a visual to evaluate whether they are meeting their 5% additional Online CTR Goal.**
+
+🔍 We need to create some measures 
+
 
 ## 🛠️ DAX
 Some key DAX formulas used to create measures and calculated columns:
@@ -80,6 +100,57 @@ Total Revenue = SUM('POS data'[Revenue($)])
 ```
 Total Units Sold = SUM('POS data'[Units_sold])
 ```
+
+- **Total Web Traffic** (Measure)
+```
+Total Web Traffic = SUM('POS data'[Page_traffic])
+```
+
+- **Web Traffic Latest Month** (Measure)
+```
+Web Traffic Latest Month = 
+CALCULATE(
+    [Total Web Traffic], DATESMTD('Calendar Table'[Date])
+)
+```
+
+- **Total Online Clicks** (Measure)
+```
+Total Online Clicks = SUM('Online data'[Online_Clicks])
+```
+
+- **Total Online Impressions** (Measures)
+```
+Total Online Impressions = SUM('Online data'[Online_Impressions])
+```
+
+- **Online CTR** (Measure)
+```
+Online CTR = 
+DIVIDE( 
+    [Total Online Clicks],
+    [Total Online Impressions],
+    0
+)
+```
+
+- **CTR Latest Month** (Measure)
+```
+CTR Latest Month = 
+CALCULATE(
+    [Online CTR],
+    DATESMTD('Calendar Table'[Date])
+)
+```
+- 
+```
+CTR Target = 
+CALCULATE(
+    [Online CTR],
+    PREVIOUSMONTH('Calendar Table'[Date])
+) * 1.05
+```
+
 
 ## 🔗 Table Relation Model and Creating Calendar Table
 
