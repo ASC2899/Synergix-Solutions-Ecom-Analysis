@@ -25,13 +25,59 @@ The dataset provided by Synergix Solutions includes the following key components
 
 ## 📌 Problem Statements, Solution approach and Key Findings
 
-❓ **Synergix has been aggressively channeling their resources into online marketing to attract more people on their ecom portal. Now after a period of rigorous marketing there is one question looming large at synergix, "_Was the online marketing investment worth it?_"**
+**❓ Synergix Has Been Aggressively Channeling Their Resources Into Online Marketing to attract more users to their e-commerce portal. Now, after a period of rigorous marketing, one crucial question looms large at Synergix:**
 
-🔍 
-[Calendar Table](#-table-relation-model)
-💡
+**"_Was The Online Marketing Investment Worth It?_"**
 
-## 🔗 Table Relation Model
+🔍 To answer this, we begin by visualizing **Total Online Spend** and **Total Revenue** over time using the **Date** column from the [Calendar Table](#-table-relation-model). We remove the **Day** level from the hierarchy to get a **monthly view across two years**.
+
+💡 As you can see It's evident that as **online marketing spend** increases, there’s a **parallel rise in monthly revenue** over time.
+
+![Q1](Assets/Q1.png)
+
+To understand **what’s driving this revenue growth**, we break down its two components:  
+- **Units Sold**
+- **Price Per Unit**
+
+Next, we visualize **Average Unit Price** (from POS Data) against Dates from the [Calendar Table](#-table-relation-model), again removing the Day level to view monthly trends.
+
+💡 This clearly shows that **Synergix has steadily increased unit prices over time**, which is **likely the primary driver** behind the rising revenue.
+
+![Q1.1](Assets/Q1.1.png)
+
+To verify whether **units sold** also contributed to revenue growth, we compare **Total Units Sold** and **Total Online Spend** over time using a **Line and Clustered Column Chart**.
+
+💡 The result shows that while **online marketing expenses nearly doubled** over two years, there has been **no significant increase in units sold**. This confirms that **the revenue growth is primarily due to the increased unit price**.
+
+![Q1.2](Assets/Q1.2.png)
+
+💡 However, here’s an **interesting insight**: Despite the **higher unit price**, **product demand has not declined**. This may suggest that the **increased online marketing spend helped sustain demand**.
+
+⚠️ Still, from a **business sustainability** perspective, relying **solely on higher pricing** — without growing the **customer base or sales volume** — is a **risky and short-sighted strategy**.
+
+---
+
+**❓Synergix wants to understand the impact of web traffic on unit sold.**
+
+## 🛠️ DAX
+Some key DAX formulas used to create measures and calculated columns:
+
+- **Total Online Spend** (Measure)
+```
+Total Online Spend = SUM('Online data'[Online_Cost])
+```
+
+- **Total Revenue** (Measure)
+```
+Total Revenue = SUM('POS data'[Revenue($)])
+```
+
+- **Total Units Sold** (Measure)
+```
+Total Units Sold = SUM('POS data'[Units_sold])
+```
+
+## 🔗 Table Relation Model and Creating Calendar Table
 
 Before proceeding with any steps in this project, it is **mandatory to create a Calendar Table** in Power BI. This table acts as a central reference for all time-based analysis and relationships across the data model.
 
