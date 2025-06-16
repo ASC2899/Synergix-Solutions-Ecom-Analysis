@@ -29,7 +29,7 @@ The dataset provided by Synergix Solutions includes the following key components
 
 **"_Was The Online Marketing Investment Worth It?_"**
 
-🔍 To answer this, we begin by visualizing **Total Online Spend** and **Total Revenue** over time using the **Date** column from the [Calendar Table](#-table-relation-model). We remove the **Day** level from the hierarchy to get a **monthly view across two years**.
+🔍 To answer this, we begin by visualizing **Total Online Spend** and **Total Revenue** over time using the **Date** column from the [Calendar Table](#-table-relation-model-and-creating-calendar-table). We remove the **Day** level from the hierarchy to get a **monthly view across two years**.
 
 💡 As you can see It's evident that as **online marketing spend** increases, there’s a **parallel rise in monthly revenue** over time.
 
@@ -39,7 +39,7 @@ To understand **what’s driving this revenue growth**, we break down its two co
 - **Units Sold**
 - **Price Per Unit**
 
-Next, we visualize **Average Unit Price** (from POS Data) against Dates from the [Calendar Table](#-table-relation-model), again removing the Day level to view monthly trends.
+Next, we visualize **Average Unit Price** (from POS Data) against Dates from the [Calendar Table](#-table-relation-model-and-creating-calendar-table), again removing the Day level to view monthly trends.
 
 💡 This clearly shows that **Synergix has steadily increased unit prices over time**, which is **likely the primary driver** behind the rising revenue.
 
@@ -58,6 +58,10 @@ To verify whether **units sold** also contributed to revenue growth, we compare 
 ---
 
 **❓Synergix wants to understand the impact of web traffic on unit sold.**
+
+🔍 We need to plot **Total Web Traffic** and **Total Unit Sold** by time remove Quarter and Day level from the Date hierarchy using **Line and Clustered Column Chart**
+
+💡
 
 ## 🛠️ DAX
 Some key DAX formulas used to create measures and calculated columns:
