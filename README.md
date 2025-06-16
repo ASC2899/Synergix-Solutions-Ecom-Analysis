@@ -65,7 +65,7 @@ Make sure to **remove the Quarter and Day levels** from the Date hierarchy for a
 💡 The analysis reveals a **moderately positive relationship** between **Web Traffic** and **Units Sold**.  
 We can clearly observe that **spikes in web traffic correlate with increases in unit sales**.
 
-![alt text](Assets/Q2.png)
+![Q2](Assets/Q2.png)
 
 ---
 
@@ -73,15 +73,43 @@ For tracking the **traffic target**, we create a **KPI card**. But before that, 
 - **Web Traffic Latest Month**  
 - **Web Traffic Target**
 
-You can find the DAX logic for these measures in the [**🛠️ DAX**](#-dax) section.
+You can find the DAX logic for these measures in the [🛠️ DAX](#-dax) section.
 
-![alt text](Assets/Q2.1.png)
+![Q2.1](Assets/Q2.1.png)
 
 
-**❓Synergix wants to know CTR of their Online Ads and also want a visual to evaluate whether they are meeting their 5% additional Online CTR Goal.**
+**❓ Synergix Wants To Know The CTR (Click-Through Rate) Of Their Online Ads They also want a visual to evaluate whether they are meeting their 5% additional Online CTR Goal**.
 
-🔍 We need to create some measures 
+🔍 To begin, we first need to create the following DAX measures:  
+- **Total Online Clicks**  
+- **Total Online Impressions**
 
+Then, using these two, we calculate the **Online CTR** measure.
+
+Next, we create an **Area Chart** with **Online CTR** on the Y-axis and **Dates** from the Calendar Table on the X-axis.
+
+💡 The chart reveals some **concerning insights** — even at their **peak performance in September 2022**, Synergix only achieved a **CTR of 0.74%**, which is **well below industry averages**.
+
+From earlier analysis, we already know that **marketing spend has been increasing**, yet this visualization confirms that **Online CTR hasn’t significantly improved** over time.
+
+📈 Another notable observation:  
+There are **certain months where CTR spikes**, indicating the online ads were **particularly compelling**.  
+However, **other months show dips**, suggesting inconsistency in ad effectiveness.  
+This highlights the need for the **marketing team to actively monitor CTR performance** and establish a **target benchmark**.
+
+![Q3](Assets/Q3.png)
+
+---
+
+To track the **CTR target**, we create a **KPI card** using two more DAX measures:  
+- **CTR Latest Month**  
+- **CTR Target**
+
+
+You can find the DAX logic for these measures in the [🛠️ DAX](#-dax) section.
+![Q3.1](Assets/Q3.1.png)
+
+❓ 
 
 ## 🛠️ DAX
 Some key DAX formulas used to create measures and calculated columns:
@@ -142,7 +170,7 @@ CALCULATE(
     DATESMTD('Calendar Table'[Date])
 )
 ```
-- 
+- **CTR Target** (Measure)
 ```
 CTR Target = 
 CALCULATE(
