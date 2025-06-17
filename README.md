@@ -57,9 +57,9 @@ To verify whether **units sold** also contributed to revenue growth, we compare 
 
 ---
 
-**❓ Synergix Wants To Understand The Impact Of Web Traffic On Units Sold. They also want a visual to evaluate whether they are meeting their 10% additional Web Traffic Goal**.
+**❓ Synergix is looking to understand how web traffic is influencing product sales. As part of their digital growth objectives, they’ve set a target to increase web traffic by 10%. The team now wants to analyze the relationship between traffic volume and units sold, and evaluate whether they are on track to meet this goal.**.
 
-🔍 To explore this, we plot **Total Web Traffic** and **Total Units Sold** over time using a **Line and Clustered Column Chart**.  
+🔍 To tackle with this question, we have to plot **Total Web Traffic** and **Total Units Sold** over time using a **Line and Clustered Column Chart**.  
 Make sure to **remove the Quarter and Day levels** from the Date hierarchy for a cleaner, monthly view.
 
 💡 The analysis reveals a **moderately positive relationship** between **Web Traffic** and **Units Sold**.  
@@ -67,18 +67,18 @@ We can clearly observe that **spikes in web traffic correlate with increases in 
 
 ![Q2](Assets/Q2.png)
 
----
 
 For tracking the **traffic target**, we create a **KPI card**. But before that, we define two DAX measures:  
 - **Web Traffic Latest Month**  
 - **Web Traffic Target**
 
-You can find the DAX logic for these measures in the [🛠️ DAX](#-dax) section.
+You can find the DAX logic for these measures in the [🛠️ DAX](#dax) section.
 
 ![Q2.1](Assets/Q2.1.png)
 
+---
 
-**❓ Synergix Wants To Know The CTR (Click-Through Rate) Of Their Online Ads They also want a visual to evaluate whether they are meeting their 5% additional Online CTR Goal**.
+**❓ The marketing team at Synergix wants to evaluate the performance of their online advertising campaigns. Specifically, they are interested in tracking the Click-Through Rate (CTR) over time and assessing whether they are progressing toward a new strategic goal of increasing CTR by 5%.**.
 
 🔍 To begin, we first need to create the following DAX measures:  
 - **Total Online Clicks**  
@@ -86,9 +86,9 @@ You can find the DAX logic for these measures in the [🛠️ DAX](#-dax) sectio
 
 Then, using these two, we calculate the **Online CTR** measure.
 
-Next, we create an **Area Chart** with **Online CTR** on the Y-axis and **Dates** from the Calendar Table on the X-axis.
+Next, we create an **Area Chart** with **Online CTR** on the Y-axis and **Dates** from the [Calendar Table](#-table-relation-model-and-creating-calendar-table) on the X-axis.
 
-💡 The chart reveals some **concerning insights** — even at their **peak performance in September 2022**, Synergix only achieved a **CTR of 0.74%**, which is **well below industry averages**.
+💡 The chart reveals some **concerning insights** — even at their **peak performance in September 2022**, Synergix only achieved a **CTR of 0.74%**, which is **way below industry averages** which is about 1%-2%.
 
 From earlier analysis, we already know that **marketing spend has been increasing**, yet this visualization confirms that **Online CTR hasn’t significantly improved** over time.
 
@@ -99,17 +99,51 @@ This highlights the need for the **marketing team to actively monitor CTR perfor
 
 ![Q3](Assets/Q3.png)
 
----
-
 To track the **CTR target**, we create a **KPI card** using two more DAX measures:  
 - **CTR Latest Month**  
 - **CTR Target**
 
+You can find the DAX logic for these measures in the [🛠️ DAX](#dax) section.
 
-You can find the DAX logic for these measures in the [🛠️ DAX](#-dax) section.
 ![Q3.1](Assets/Q3.1.png)
 
-❓ 
+---
+
+**❓  As part of its cost optimization strategy, Synergix has set a goal to reduce its Cost Per Click (CPC) for online advertising by 2%. The marketing team wants to monitor CPC trends over time and evaluate whether this cost-efficiency target is being achieved.**
+
+🔍 To proceed with this analysis, we first need to create a measure, **Online CPC** (Cost Per Click).  
+Next, we plot an **Area Chart** using **Online CPC** over time, removing the **Day level** from the Dates hierarchy in the [**Calendar Table**](#-table-relation-model-and-creating-calendar-table).
+
+💡 The visualization reveals that **CPC values fluctuate month-to-month** — with certain months showing **spikes**, while others show **dips**.  
+- A **high CPC** indicates that Synergix paid more per click, possibly due to **increased competition** or **lower ad relevance**, making **customer acquisition more expensive**.  
+- A **low CPC** means the company achieved **more efficient ad spending**, gaining more value for the same cost.
+
+📉 Despite these fluctuations, there is **no clear long-term upward or downward trend** in CPC.
+
+![Q4](Assets/Q4.png)
+
+To gain deeper insight, we overlay the **Online CTR** measure on the **secondary Y-axis** of the same chart.
+
+💡 This reveals an **inconsistent relationship** between **CPC and CTR**.  
+However, a **noteworthy observation** is that in **January and February 2022**, **CTR peaked while CPC dropped** — indicating **high-performing, cost-effective ad campaigns**.
+
+📌 This insight can help the marketing team **reverse-engineer successful strategies** from those months and apply them to future campaigns.
+
+![Q4.1](Assets/Q4.1.png)
+
+To evaluate whether Synergix is moving toward its **2% CPC reduction target**, we create a **KPI card** using these DAX measures:
+- **CPC Latest Month**
+- **CPC Target**
+
+You can find the logic for these measures in the [**🛠️ DAX**](#dax) section.
+
+📊 Since **lower CPC is favorable**, be sure to configure the KPI card appropriately:  
+- Under **Visual Format > Trend Axis**, set **Direction = Low is Good**  
+- Set **Distance Direction = Increasing is Positive** to accurately reflect performance.
+
+
+![Q4.2](Assets/Q4.2.png)
+
 
 ## 🛠️ DAX
 Some key DAX formulas used to create measures and calculated columns:
@@ -140,6 +174,15 @@ Web Traffic Latest Month =
 CALCULATE(
     [Total Web Traffic], DATESMTD('Calendar Table'[Date])
 )
+```
+
+- **Web Traffic Target** (Measure)
+```
+Web Traffic Target = 
+CALCULATE(
+    [Total Web Traffic],
+    PREVIOUSMONTH('Calendar Table'[Date])
+) * 1.10
 ```
 
 - **Total Online Clicks** (Measure)
@@ -177,6 +220,34 @@ CALCULATE(
     [Online CTR],
     PREVIOUSMONTH('Calendar Table'[Date])
 ) * 1.05
+```
+
+- **Online CPC** (Measure)
+```
+Online CPC = 
+DIVIDE(
+    [Total Online Spend],
+    [Total Online Clicks],
+    0
+)
+```
+
+- **CPC Latest Month** (Measure)
+```
+CPC Latest Month = 
+CALCULATE(
+    [Online CPC],
+    DATESMTD('Calendar Table'[Date])
+)
+```
+
+- **CPC Target** (Measure)
+```
+CPC Target = 
+CALCULATE(
+    [Online CPC],
+    PREVIOUSMONTH('Calendar Table'[Date])
+) * 0.98
 ```
 
 
