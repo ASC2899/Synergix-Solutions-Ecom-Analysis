@@ -349,3 +349,14 @@ RETURN
 ```
 After creating the Calendar Table, you must establish relationships between the Calendar Table and every other table that contains a Date column.
 Once all relationships are built correctly, your model should look similar to [this](./Assets/Table_Relation_Model.png).
+
+## 🧠 Tools Used
+- **Power BI** for data modeling, visualization, and interactivity
+
+- **DAX** for custom calculations
+
+- **Excel** for initial dataset understanding & eyeballing.
+
+_I designed this data and dashboard to simulate a real-world business scenario and solve practical problems using data. I aimed to balance performance metrics, storytelling, and visual clarity._
+
+_Feel free to explore, give feedbacks, or suggest improvements!_
