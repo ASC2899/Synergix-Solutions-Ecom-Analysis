@@ -141,34 +141,80 @@ You can find the logic for these measures in the [**🛠️ DAX**](#dax) section
 - Under **Visual Format > Trend Axis**, set **Direction = Low is Good**  
 - Set **Distance Direction = Increasing is Positive** to accurately reflect performance.
 
-
 ![Q4.2](Assets/Q4.2.png)
+
+---
+
+❓ **The finance team at Synergix wants to analyze the overall marketing investment and how it compares with the Revenue.
+They’re particularly interested in:**
+
+- **Tracking the total marketing spend.**
+- **Breaking down channel-wise contribution (Online Ads vs VPC) within the total marketing spend.**
+
+🔍 At Synergix, **online marketing expenses** are divided into two key components:
+- **Online Ad Spend**
+- **Voucher & Coupon (VPC) Spend**
+
+To analyze the **total marketing investment**, we first calculate:
+- **Total Online Spend** (already calculated)
+- **Total Coupon Spend**
+➡️ Adding these gives us the **Total Marketing Spend.**
+
+You can find the DAX logic for all three measures in the [**🛠️ DAX**](#-dax) section.
+
+Using a **Donut Chart**, we visualize the **distribution** of marketing spend across the two channels.
+
+💡 From **January 2021 to December 2022**, Synergix invested **$31.8 million** in online marketing.
+The visual clearly highlights a **heavy bias toward Online Ads**, which account for **96% of the total marketing budget.**
+
+![Q5](Assets/Q5.png)
+
+---
+
+❓ **Synergix management wants to evaluate their overall revenue and understand how it is distributed across different segments.**\
+**Lastly for long-term sustainable growth, Synergix implemented a strategic policy to allocate 20% of total revenue to online marketing initiatives. So they decided to analyze whether this 20% reinvestment threshold has been consistently met on a monthly basis over the past two years.**
+
+🔍 We’ve already calculated **Total Revenue**, and now we’ll dive deeper by creating a **Donut Chart** to visualize **revenue distribution across different segments**.
+
+💡 The **Total Revenue** generated from **January 2021 to December 2022** stands at an impressive **$448.7 million**, with the **Makeup segment** emerging as the **top contributor** to Synergix’s earnings.
+
+![Q6](Assets/Q6.png)
+
+To address the **second part** of this analysis, we create a new measure:
+> **% Total Marketing Spend from Revenue** = Total Marketing Spend / Total Revenue
+
+This allows us to **track the efficiency** of marketing investments in proportion to the revenue generated over time.
+
+💡 In **2021**, marketing spend as a percentage of revenue consistently stayed within the **6–8%** range.  
+However, in the **second half of 2022**, several months crossed the **10%** threshold — indicating Synergix is moving toward its **20% reinvestment goal** and has **room to scale** online marketing initiatives.
+
+![Q6.1](Assets/Q6.1.png)
 
 
 ## 🛠️ DAX
-Some key DAX formulas used to create measures and calculated columns:
+Some key DAX formulas logic used to create measures for this project:
 
-- **Total Online Spend** (Measure)
+- **Total Online Spend**
 ```
 Total Online Spend = SUM('Online data'[Online_Cost])
 ```
 
-- **Total Revenue** (Measure)
+- **Total Revenue**
 ```
 Total Revenue = SUM('POS data'[Revenue($)])
 ```
 
-- **Total Units Sold** (Measure)
+- **Total Units Sold**
 ```
 Total Units Sold = SUM('POS data'[Units_sold])
 ```
 
-- **Total Web Traffic** (Measure)
+- **Total Web Traffic**
 ```
 Total Web Traffic = SUM('POS data'[Page_traffic])
 ```
 
-- **Web Traffic Latest Month** (Measure)
+- **Web Traffic Latest Month**
 ```
 Web Traffic Latest Month = 
 CALCULATE(
@@ -176,7 +222,7 @@ CALCULATE(
 )
 ```
 
-- **Web Traffic Target** (Measure)
+- **Web Traffic Target**
 ```
 Web Traffic Target = 
 CALCULATE(
@@ -185,17 +231,17 @@ CALCULATE(
 ) * 1.10
 ```
 
-- **Total Online Clicks** (Measure)
+- **Total Online Clicks**
 ```
 Total Online Clicks = SUM('Online data'[Online_Clicks])
 ```
 
-- **Total Online Impressions** (Measures)
+- **Total Online Impressions**
 ```
 Total Online Impressions = SUM('Online data'[Online_Impressions])
 ```
 
-- **Online CTR** (Measure)
+- **Online CTR**
 ```
 Online CTR = 
 DIVIDE( 
@@ -205,7 +251,7 @@ DIVIDE(
 )
 ```
 
-- **CTR Latest Month** (Measure)
+- **CTR Latest Month**
 ```
 CTR Latest Month = 
 CALCULATE(
@@ -213,7 +259,7 @@ CALCULATE(
     DATESMTD('Calendar Table'[Date])
 )
 ```
-- **CTR Target** (Measure)
+- **CTR Target**
 ```
 CTR Target = 
 CALCULATE(
@@ -222,7 +268,7 @@ CALCULATE(
 ) * 1.05
 ```
 
-- **Online CPC** (Measure)
+- **Online CPC**
 ```
 Online CPC = 
 DIVIDE(
@@ -232,7 +278,7 @@ DIVIDE(
 )
 ```
 
-- **CPC Latest Month** (Measure)
+- **CPC Latest Month**
 ```
 CPC Latest Month = 
 CALCULATE(
@@ -241,13 +287,33 @@ CALCULATE(
 )
 ```
 
-- **CPC Target** (Measure)
+- **CPC Target**
 ```
 CPC Target = 
 CALCULATE(
     [Online CPC],
     PREVIOUSMONTH('Calendar Table'[Date])
 ) * 0.98
+```
+
+- **Total Coupon Spend**
+```
+Total Coupon Spend = SUM('VPC data'[Sum of Spend])
+```
+
+- **Total Marketing Spend**
+```
+Total Marketing Spend = [Total Online Spend] + [Total Coupon Spend]
+```
+
+- **% Total Marketing Spend from Revenue**
+```
+% Total Marketing Spend from Revenue = 
+DIVIDE(
+    [Total Marketing Spend],
+    [Total Revenue],
+    0
+)
 ```
 
 
